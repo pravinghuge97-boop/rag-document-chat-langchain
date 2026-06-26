@@ -1,0 +1,40 @@
+ARTIFICIAL INTELLIGENCE
+
+Services:
+
+AI Chatbots
+
+OpenAI Integration
+
+LangChain
+
+LangGraph
+
+RAG
+
+Document Chat
+
+OCR
+
+Computer Vision
+
+Speech Recognition
+
+Natural Language Processing
+
+Recommendation Systems
+
+Generative AI
+
+FAQ
+
+Q: What AI services do you provide?
+
+A:
+We build AI chatbots, OCR systems, Computer Vision solutions,
+Document AI, and Retrieval-Augmented Generation applications.
+
+Q: Which LLMs do you support?
+
+A:
+OpenAI, Claude, Gemini, Llama, Mistral and Hugging Face models.

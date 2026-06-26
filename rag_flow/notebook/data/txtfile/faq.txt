@@ -1,0 +1,102 @@
+FREQUENTLY ASKED QUESTIONS
+
+Q: What services does Unistack Solutions provide?
+
+A:
+AI Development, Web Development, Mobile Apps,
+Cloud Computing, DevOps, ERP, CRM and Business Automation.
+
+----------------------------------------------------
+
+Q: Which programming languages do you use?
+
+A:
+Python, JavaScript, TypeScript, C#, Java and Go.
+
+----------------------------------------------------
+
+Q: Which frameworks do you use?
+
+A:
+React, Angular, Next.js, Django, FastAPI,
+Flask, Node.js and Express.
+
+----------------------------------------------------
+
+Q: Which databases do you support?
+
+A:
+PostgreSQL, MySQL, MongoDB,
+Redis, Elasticsearch and SQLite.
+
+----------------------------------------------------
+
+Q: Which cloud providers do you support?
+
+A:
+AWS, Azure and Google Cloud.
+
+----------------------------------------------------
+
+Q: Do you build AI applications?
+
+A:
+Yes.
+
+We build:
+
+AI Chatbots
+
+Document AI
+
+OCR
+
+Computer Vision
+
+Machine Learning
+
+LLM Applications
+
+LangChain Applications
+
+LangGraph Agents
+
+RAG Applications
+
+----------------------------------------------------
+
+Q: Which industries do you serve?
+
+A:
+Healthcare
+
+Education
+
+Retail
+
+Finance
+
+Insurance
+
+Manufacturing
+
+Agriculture
+
+Logistics
+
+Real Estate
+
+Travel
+
+Hospitality
+
+Government
+
+----------------------------------------------------
+
+Q: Do you build custom software?
+
+A:
+Yes.
+
+Every solution is customized according to business requirements.

@@ -1,0 +1,32 @@
+MOBILE DEVELOPMENT
+
+Platforms:
+Android
+iOS
+
+Technologies:
+Flutter
+React Native
+Kotlin
+Swift
+
+Features:
+Authentication
+Payment Integration
+Push Notifications
+Location Tracking
+Chat
+Video Calling
+Offline Support
+
+FAQ
+
+Q: Do you build Android applications?
+
+A:
+Yes.
+
+Q: Do you build iOS applications?
+
+A:
+Yes.

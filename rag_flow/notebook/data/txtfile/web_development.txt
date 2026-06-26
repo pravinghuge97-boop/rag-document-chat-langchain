@@ -1,0 +1,39 @@
+WEB DEVELOPMENT
+
+Frontend Technologies:
+- React.js
+- Next.js
+- Angular
+- Vue.js
+- HTML5
+- CSS3
+- Bootstrap
+- Tailwind CSS
+- JavaScript
+- TypeScript
+
+Backend Technologies:
+- Django
+- FastAPI
+- Flask
+- Node.js
+- Express.js
+- Laravel
+
+Databases:
+- PostgreSQL
+- MySQL
+- MongoDB
+- Redis
+
+Frequently Asked Questions
+
+Q: Do you develop custom web applications?
+
+A:
+Yes. We build scalable enterprise-grade web applications.
+
+Q: Which frontend framework do you recommend?
+
+A:
+React.js and Next.js for modern applications.

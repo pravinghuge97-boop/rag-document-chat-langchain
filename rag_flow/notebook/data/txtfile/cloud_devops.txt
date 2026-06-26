@@ -1,0 +1,39 @@
+CLOUD & DEVOPS
+
+AWS
+
+EC2
+
+Lambda
+
+S3
+
+CloudFront
+
+RDS
+
+IAM
+
+Azure
+
+Google Cloud
+
+Docker
+
+Docker Compose
+
+Kubernetes
+
+GitHub Actions
+
+GitLab CI/CD
+
+Terraform
+
+FAQ
+
+Q: Do you deploy applications?
+
+A:
+Yes. We deploy applications using Docker, Kubernetes,
+AWS, Azure and Google Cloud.
