@@ -1,0 +1,274 @@
+[
+  {
+    "id": "col-1782569792",
+    "name": "Docx file",
+    "description": "Docx file testing",
+    "type": "mixed",
+    "createdAt": "2026-06-27",
+    "files": [
+      {
+        "id": "f-1782569806-file-sample_1MB.docx",
+        "name": "file-sample_1MB.docx",
+        "type": "docx",
+        "size": "1002.7 KB",
+        "path": "uploads\\col-1782569792\\file-sample_1MB.docx",
+        "chunks": 1002
+      },
+      {
+        "id": "f-1782569806-file-sample_100kB.docx",
+        "name": "file-sample_100kB.docx",
+        "type": "docx",
+        "size": "108.7 KB",
+        "path": "uploads\\col-1782569792\\file-sample_100kB.docx",
+        "chunks": 108
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782545710",
+    "name": "ui test",
+    "description": "ui test",
+    "type": "mixed",
+    "createdAt": "2026-06-27",
+    "files": [
+      {
+        "id": "f-1782545726-Portfolio.pdf",
+        "name": "Portfolio.pdf",
+        "type": "pdf",
+        "size": "2273.6 KB",
+        "path": "uploads\\col-1782545710\\Portfolio.pdf",
+        "chunks": 2273
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782507764",
+    "name": "jk",
+    "description": "k",
+    "type": "mixed",
+    "createdAt": "2026-06-27",
+    "files": [
+      {
+        "id": "f-1782544263-AcctStatement (2) (1).pdf",
+        "name": "AcctStatement (2) (1).pdf",
+        "type": "pdf",
+        "size": "130.4 KB",
+        "path": "uploads\\col-1782507764\\AcctStatement (2) (1).pdf",
+        "chunks": 130
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782504503",
+    "name": "Url test",
+    "description": "Unistack Solutions",
+    "type": "mixed",
+    "createdAt": "2026-06-27",
+    "files": [
+      {
+        "id": "f-1782504511-url",
+        "name": "https://www.unistacksolutions.com/",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/",
+        "chunks": 4
+      },
+      {
+        "id": "f-1782504526-url",
+        "name": "https://www.unistacksolutions.com/about",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/about",
+        "chunks": 4
+      },
+      {
+        "id": "f-1782504556-url",
+        "name": "https://www.unistacksolutions.com/services",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/services",
+        "chunks": 4
+      },
+      {
+        "id": "f-1782504566-url",
+        "name": "https://www.unistacksolutions.com/internships",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/internships",
+        "chunks": 4
+      },
+      {
+        "id": "f-1782504579-url",
+        "name": "https://www.unistacksolutions.com/blogs",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/blogs",
+        "chunks": 4
+      },
+      {
+        "id": "f-1782504589-url",
+        "name": "https://www.unistacksolutions.com/contact",
+        "type": "url",
+        "size": "~Web",
+        "path": "https://www.unistacksolutions.com/contact",
+        "chunks": 4
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782499659",
+    "name": "Excel collection",
+    "description": "Excel collection",
+    "type": "mixed",
+    "createdAt": "2026-06-27",
+    "files": [
+      {
+        "id": "f-1782499693-fsi-2018.xlsx",
+        "name": "fsi-2018.xlsx",
+        "type": "excel",
+        "size": "125.6 KB",
+        "path": "uploads\\col-1782499659\\fsi-2018.xlsx",
+        "chunks": 125
+      },
+      {
+        "id": "f-1782499693-fsi-2019.xlsx",
+        "name": "fsi-2019.xlsx",
+        "type": "excel",
+        "size": "106.9 KB",
+        "path": "uploads\\col-1782499659\\fsi-2019.xlsx",
+        "chunks": 106
+      },
+      {
+        "id": "f-1782499693-fsi-2020.xlsx",
+        "name": "fsi-2020.xlsx",
+        "type": "excel",
+        "size": "249.7 KB",
+        "path": "uploads\\col-1782499659\\fsi-2020.xlsx",
+        "chunks": 249
+      },
+      {
+        "id": "f-1782499693-fsi-2021.xlsx",
+        "name": "fsi-2021.xlsx",
+        "type": "excel",
+        "size": "26.1 KB",
+        "path": "uploads\\col-1782499659\\fsi-2021.xlsx",
+        "chunks": 26
+      },
+      {
+        "id": "f-1782499693-fsi-2022-download.xlsx",
+        "name": "fsi-2022-download.xlsx",
+        "type": "excel",
+        "size": "60.1 KB",
+        "path": "uploads\\col-1782499659\\fsi-2022-download.xlsx",
+        "chunks": 60
+      },
+      {
+        "id": "f-1782499693-FSI-2023-DOWNLOAD.xlsx",
+        "name": "FSI-2023-DOWNLOAD.xlsx",
+        "type": "excel",
+        "size": "26.3 KB",
+        "path": "uploads\\col-1782499659\\FSI-2023-DOWNLOAD.xlsx",
+        "chunks": 26
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782488146",
+    "name": "Aws",
+    "description": "Aws",
+    "type": "mixed",
+    "createdAt": "2026-06-26",
+    "files": [
+      {
+        "id": "f-1782488212-wellarchitected-framework.pdf",
+        "name": "wellarchitected-framework.pdf",
+        "type": "pdf",
+        "size": "13858.3 KB",
+        "path": "uploads\\col-1782488146\\wellarchitected-framework.pdf",
+        "chunks": 13858
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782486953",
+    "name": "resume",
+    "description": "resume",
+    "type": "mixed",
+    "createdAt": "2026-06-26",
+    "files": [
+      {
+        "id": "f-1782486963-pravin_resume_06_24_2026.pdf",
+        "name": "pravin_resume_06_24_2026.pdf",
+        "type": "pdf",
+        "size": "80.2 KB",
+        "path": "uploads\\col-1782486953\\pravin_resume_06_24_2026.pdf",
+        "chunks": 80
+      }
+    ],
+    "folders": []
+  },
+  {
+    "id": "col-1782485649",
+    "name": "pdf",
+    "description": "pdf",
+    "type": "mixed",
+    "createdAt": "2026-06-26",
+    "files": [
+      {
+        "id": "f-1782485661-AI_RAG.pdf",
+        "name": "AI_RAG.pdf",
+        "type": "pdf",
+        "size": "2.0 KB",
+        "path": "uploads\\col-1782485649\\AI_RAG.pdf",
+        "chunks": 1
+      },
+      {
+        "id": "f-1782485661-Company_Overview.pdf",
+        "name": "Company_Overview.pdf",
+        "type": "pdf",
+        "size": "1.9 KB",
+        "path": "uploads\\col-1782485649\\Company_Overview.pdf",
+        "chunks": 1
+      },
+      {
+        "id": "f-1782485661-Contact.pdf",
+        "name": "Contact.pdf",
+        "type": "pdf",
+        "size": "1.7 KB",
+        "path": "uploads\\col-1782485649\\Contact.pdf",
+        "chunks": 1
+      },
+      {
+        "id": "f-1782485661-FAQ.pdf",
+        "name": "FAQ.pdf",
+        "type": "pdf",
+        "size": "1.8 KB",
+        "path": "uploads\\col-1782485649\\FAQ.pdf",
+        "chunks": 1
+      },
+      {
+        "id": "f-1782485661-Services.pdf",
+        "name": "Services.pdf",
+        "type": "pdf",
+        "size": "1.7 KB",
+        "path": "uploads\\col-1782485649\\Services.pdf",
+        "chunks": 1
+      },
+      {
+        "id": "f-1782485661-Technologies.pdf",
+        "name": "Technologies.pdf",
+        "type": "pdf",
+        "size": "1.8 KB",
+        "path": "uploads\\col-1782485649\\Technologies.pdf",
+        "chunks": 1
+      }
+    ],
+    "folders": []
+  }
+]
