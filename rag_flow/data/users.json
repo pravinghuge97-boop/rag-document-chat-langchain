@@ -1,0 +1,18 @@
+[
+  {
+    "id": "user-1782741643",
+    "username": "pravinghuge97",
+    "email": "pravinghuge97@gmail.com",
+    "password": "74b5528db9906f7689fbdb475f38add6f32498a6ad1ca4ff2fa9c6b3d4482a4b",
+    "role": "user",
+    "createdAt": "2026-06-29T19:30:43.403644"
+  },
+  {
+    "id": "user-admin",
+    "username": "admin",
+    "email": "admin@rag.local",
+    "password": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "role": "admin",
+    "createdAt": "2026-06-29T19:19:10.492565"
+  }
+]

@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from utils.file_utils import init_dirs, read_json, COLLECTIONS_FILE, PIPELINES_FILE
-from routers import collections, pipeline, chat
+from routers import collections, pipeline, chat, auth
+from routers.auth import get_current_user
 
 # Load environment variables
 load_dotenv()
@@ -23,6 +24,7 @@ app.add_middleware(
 init_dirs()
 
 # Include routers
+app.include_router(auth.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(collections.router, prefix="/api/collections", tags=["Collections"])
 app.include_router(pipeline.router, prefix="/api/pipeline", tags=["Pipeline"])
 app.include_router(chat.router, prefix="/api/chat", tags=["Chat"])
@@ -33,15 +35,19 @@ async def startup_event():
     from services.job_manager import set_main_loop
     set_main_loop(asyncio.get_running_loop())
 
+from fastapi import Depends
+
 @app.get("/api/dashboard/stats")
-async def get_dashboard_stats():
+async def get_dashboard_stats(current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
     pipelines = read_json(PIPELINES_FILE)
+
+    if current_user.get('role') != 'admin':
+        cols = [c for c in cols if c.get('userId') == current_user['id']]
+        pipelines = [p for p in pipelines if p.get('userId') == current_user['id']]
     
     total_files = sum(len(c["files"]) for c in cols)
-    total_chunks = 0 
-    for c in cols:
-         total_chunks += sum(f.get("chunks", 0) for f in c["files"])
+    total_chunks = sum(sum(f.get("chunks", 0) for f in c["files"]) for c in cols)
          
     return {
         "collections": len(cols),

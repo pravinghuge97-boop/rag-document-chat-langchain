@@ -89,6 +89,7 @@ def run_pipeline_task(job_id: str, pipeline_data: dict):
             "status": "done",
             "embeddingModel": pipeline_data["embeddingModel"],
             "llmModel": pipeline_data["llmModel"],
+            "userId": pipeline_data.get("userId"),
             "createdAt": datetime.now().isoformat()
         })
         write_json(PIPELINES_FILE, pipelines)

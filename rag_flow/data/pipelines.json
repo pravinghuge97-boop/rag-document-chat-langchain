@@ -1,5 +1,15 @@
 [
   {
+    "id": "pipe-1782739757",
+    "name": "My RAG Pipeline",
+    "collectionId": "col-1782569792",
+    "collectionName": "Docx file",
+    "status": "done",
+    "embeddingModel": "all-MiniLM-L6-v2",
+    "llmModel": "llama-3.3-70b-versatile",
+    "createdAt": "2026-06-29T18:59:17.207669"
+  },
+  {
     "id": "pipe-1782569833",
     "name": "My RAG Pipeline",
     "collectionId": "col-1782569792",
@@ -51,7 +61,7 @@
   },
   {
     "id": "pipe-1782504663",
-    "name": "Url Pipeline",
+    "name": "Url",
     "collectionId": "col-1782504503",
     "collectionName": "Url test",
     "status": "done",

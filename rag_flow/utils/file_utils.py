@@ -5,6 +5,7 @@ DATA_DIR = "data"
 UPLOADS_DIR = "uploads"
 COLLECTIONS_FILE = os.path.join(DATA_DIR, "collections.json")
 PIPELINES_FILE = os.path.join(DATA_DIR, "pipelines.json")
+USERS_FILE = os.path.join(DATA_DIR, "users.json")
 
 def init_dirs():
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -16,6 +17,10 @@ def init_dirs():
             
     if not os.path.exists(PIPELINES_FILE):
         with open(PIPELINES_FILE, "w") as f:
+            json.dump([], f)
+
+    if not os.path.exists(USERS_FILE):
+        with open(USERS_FILE, "w") as f:
             json.dump([], f)
 
 def read_json(path):

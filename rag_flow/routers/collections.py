@@ -1,18 +1,22 @@
 import os
 from datetime import datetime
 from typing import List
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from schemas.api_schemas import CollectionCreate, UrlUpload
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from schemas.api_schemas import CollectionCreate, CollectionUpdate, UrlUpload
+from routers.auth import get_current_user
 from utils.file_utils import read_json, write_json, COLLECTIONS_FILE, UPLOADS_DIR
 
 router = APIRouter()
 
 @router.get("")
-async def list_collections():
-    return read_json(COLLECTIONS_FILE)
+async def list_collections(current_user=Depends(get_current_user)):
+    cols = read_json(COLLECTIONS_FILE)
+    if current_user.get('role') != 'admin':
+        cols = [c for c in cols if c.get('userId') == current_user['id']]
+    return cols
 
 @router.post("")
-async def create_collection(data: CollectionCreate):
+async def create_collection(data: CollectionCreate, current_user=Depends(get_current_user)):
     col_id = f"col-{int(datetime.now().timestamp())}"
     new_col = {
         "id": col_id,
@@ -21,7 +25,8 @@ async def create_collection(data: CollectionCreate):
         "type": "mixed",
         "createdAt": datetime.now().strftime("%Y-%m-%d"),
         "files": [],
-        "folders": []
+        "folders": [],
+        "userId": current_user['id']
     }
     cols = read_json(COLLECTIONS_FILE)
     cols.insert(0, new_col)
@@ -29,16 +34,41 @@ async def create_collection(data: CollectionCreate):
     return new_col
 
 @router.get("/{col_id}")
-async def get_collection(col_id: str):
+async def get_collection(col_id: str, current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
     col = next((c for c in cols if c["id"] == col_id), None)
     if not col:
         raise HTTPException(status_code=404, detail="Collection not found")
+    if current_user.get('role') != 'admin' and col.get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
     return col
 
-@router.delete("/{col_id}")
-async def delete_collection(col_id: str):
+@router.put("/{col_id}")
+async def update_collection(col_id: str, data: CollectionUpdate, current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
+    col_idx = next((i for i, c in enumerate(cols) if c["id"] == col_id), -1)
+    if col_idx == -1:
+        raise HTTPException(status_code=404, detail="Collection not found")
+    col = cols[col_idx]
+    if current_user.get('role') != 'admin' and col.get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    if data.name is not None:
+        cols[col_idx]["name"] = data.name
+    if data.description is not None:
+        cols[col_idx]["description"] = data.description
+
+    write_json(COLLECTIONS_FILE, cols)
+    return cols[col_idx]
+
+@router.delete("/{col_id}")
+async def delete_collection(col_id: str, current_user=Depends(get_current_user)):
+    cols = read_json(COLLECTIONS_FILE)
+    col = next((c for c in cols if c["id"] == col_id), None)
+    if not col:
+        raise HTTPException(status_code=404, detail="Collection not found")
+    if current_user.get('role') != 'admin' and col.get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
     cols = [c for c in cols if c["id"] != col_id]
     write_json(COLLECTIONS_FILE, cols)
     
@@ -53,11 +83,14 @@ async def delete_collection(col_id: str):
     return {"success": True}
 
 @router.delete("/{col_id}/files/{file_id}")
-async def delete_file(col_id: str, file_id: str):
+async def delete_file(col_id: str, file_id: str, current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
     col_idx = next((i for i, c in enumerate(cols) if c["id"] == col_id), -1)
     if col_idx == -1:
         raise HTTPException(status_code=404, detail="Collection not found")
+    col = cols[col_idx]
+    if current_user.get('role') != 'admin' and col.get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
     
     file_obj = next((f for f in cols[col_idx]["files"] if f["id"] == file_id), None)
     if not file_obj:
@@ -121,11 +154,13 @@ async def delete_file(col_id: str, file_id: str):
 #     return {"success": True, "files": uploaded}
 
 @router.post("/{col_id}/upload")
-async def upload_files(col_id: str, files: List[UploadFile] = File(...)):
+async def upload_files(col_id: str, files: List[UploadFile] = File(...), current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
     col_idx = next((i for i, c in enumerate(cols) if c["id"] == col_id), -1)
     if col_idx == -1:
         raise HTTPException(status_code=404, detail="Collection not found")
+    if current_user.get('role') != 'admin' and cols[col_idx].get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
 
     col_dir = os.path.join(UPLOADS_DIR, col_id)
     os.makedirs(col_dir, exist_ok=True)
@@ -186,11 +221,13 @@ async def upload_files(col_id: str, files: List[UploadFile] = File(...)):
     }
     
 @router.post("/{col_id}/upload-url")
-async def upload_url(col_id: str, data: UrlUpload):
+async def upload_url(col_id: str, data: UrlUpload, current_user=Depends(get_current_user)):
     cols = read_json(COLLECTIONS_FILE)
     col_idx = next((i for i, c in enumerate(cols) if c["id"] == col_id), -1)
     if col_idx == -1:
         raise HTTPException(status_code=404, detail="Collection not found")
+    if current_user.get('role') != 'admin' and cols[col_idx].get('userId') != current_user['id']:
+        raise HTTPException(status_code=403, detail="Access denied")
 
     file_obj = {
         "id": f"f-{int(datetime.now().timestamp())}-url",
