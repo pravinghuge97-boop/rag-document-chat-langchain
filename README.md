@@ -64,6 +64,18 @@ uv run jupyter notebook
 ```
 
 ---
+## demo url
+<iframe src="https://www.loom.com/embed/ce0fc524538240068a8129c04f33c486" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<div>
+    <a href="https://www.loom.com/share/ce0fc524538240068a8129c04f33c486">
+      <p>Recent | Loom - 29 June 2026 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/ce0fc524538240068a8129c04f33c486">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/ce0fc524538240068a8129c04f33c486-207b6afccc9b576b-full-play.gif#t=0.1">
+    </a>
+  </div>
+https://www.loom.com/share/ce0fc524538240068a8129c04f33c486
+
 
 ## 🏢 Developed By
 
