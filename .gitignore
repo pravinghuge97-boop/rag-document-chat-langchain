@@ -148,7 +148,6 @@ activemq-data/
 *.sage.py
 
 # Environments
-.env
 .envrc
 .venv
 env/
@@ -158,6 +157,7 @@ env.bak/
 venv.bak/
 node_modules/
 notebook/
+vector_store/
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -217,3 +217,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
