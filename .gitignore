@@ -158,6 +158,7 @@ env.bak/
 venv.bak/
 node_modules/
 notebook/
+vector_store/
 # Spyder project settings
 .spyderproject
 .spyproject
