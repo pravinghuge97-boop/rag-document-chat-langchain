@@ -52,9 +52,9 @@ export default function DashboardPage() {
                   )}
                 </div>
               ))}
-            <button className="btn btn-primary btn-lg" id="dash-create-pipeline-btn" onClick={() => navigate('/pipeline')}>
+            {/* <button className="btn btn-primary btn-lg" id="dash-create-pipeline-btn" onClick={() => navigate('/pipeline')}>
               + Create Pipeline
-            </button>
+            </button> */}
             </div>
           </div>
         </section>

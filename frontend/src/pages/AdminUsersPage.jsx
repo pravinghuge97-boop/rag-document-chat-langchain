@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import * as api from '../api'
 import AppLayout from '../components/AppLayout'
+import ConfirmModal from '../components/ConfirmModal'
 import './AdminUsersPage.css'
 
 export default function AdminUsersPage() {
@@ -10,6 +11,7 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [viewMode, setViewMode] = useState('list')
+  const [confirmDelete, setConfirmDelete] = useState(null) // { id, username }
 
   useEffect(() => {
     async function loadUsers() {
@@ -25,8 +27,14 @@ export default function AdminUsersPage() {
     loadUsers()
   }, [])
 
-  const removeUser = async (id) => {
-    if (!window.confirm('Delete this user?')) return
+  const removeUser = (id, username) => {
+    setConfirmDelete({ id, username })
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!confirmDelete) return
+    const { id } = confirmDelete
+    setConfirmDelete(null)
     try {
       await api.deleteUser(id)
       setUsers(prev => prev.filter(u => u.id !== id))
@@ -39,29 +47,7 @@ export default function AdminUsersPage() {
     <AppLayout title="User Management">
       <div className="dash-page animate-fade-in">
         <section className="dash-section">
-          <div className="dash-section-header admin-users-header">
-            <div>
-              <h3>👥 Admin User Directory</h3>
-              <p>Manage registered users and view their role assignments.</p>
-            </div>
-            <div className="admin-users-header-controls">
-              <button
-                type="button"
-                className={viewMode === 'list' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-ghost'}
-                onClick={() => setViewMode('list')}
-              >
-                List
-              </button>
-              <button
-                type="button"
-                className={viewMode === 'grid' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-ghost'}
-                onClick={() => setViewMode('grid')}
-              >
-                Grid
-              </button>
-            </div>
-          </div>
-
+      
           {loading ? (
             <div className="dash-empty">
               <div className="dash-empty-icon">⏳</div>
@@ -74,10 +60,10 @@ export default function AdminUsersPage() {
             </div>
           ) : (
             <div className="admin-users-table-wrap">
-              <div className="admin-users-table-meta">
+              {/* <div className="admin-users-table-meta">
                 <span>{`Showing ${users.length} of ${users.length} users`}</span>
                 <span>{new Date().toLocaleDateString()}</span>
-              </div>
+              </div> */}
               <table className="admin-users-table">
                 <thead>
                   <tr>
@@ -109,7 +95,7 @@ export default function AdminUsersPage() {
                         <td>{new Date(u.createdAt).toLocaleDateString()}</td>
                         <td>
                           {u.role !== 'admin' ? (
-                            <button className="admin-user-action-btn delete-btn" onClick={() => removeUser(u.id)}>
+                            <button className="admin-user-action-btn delete-btn" onClick={() => removeUser(u.id, u.username)}>
                               Delete
                             </button>
                           ) : (
@@ -125,6 +111,16 @@ export default function AdminUsersPage() {
           )}
         </section>
       </div>
+
+      <ConfirmModal
+        open={!!confirmDelete}
+        title="Delete User"
+        message={confirmDelete ? `Are you sure you want to delete "${confirmDelete.username}"? This action cannot be undone.` : ''}
+        confirmLabel="Delete"
+        variant="danger"
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </AppLayout>
   )
 }

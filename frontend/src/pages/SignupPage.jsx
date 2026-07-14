@@ -9,6 +9,8 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const { signup, user } = useAuth()
   const navigate = useNavigate()
@@ -91,13 +93,22 @@ export default function SignupPage() {
                 <span className="login-input-icon">🔑</span>
                 <input
                   id="signup-password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   className="input login-input"
                   placeholder="Choose a password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   autoComplete="new-password"
                 />
+                <button
+                  type="button"
+                  className="login-eye-btn"
+                  onClick={() => setShowPassword(s => !s)}
+                  tabIndex={-1}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
               </div>
             </div>
 
@@ -107,13 +118,22 @@ export default function SignupPage() {
                 <span className="login-input-icon">🔒</span>
                 <input
                   id="signup-confirm-password"
-                  type="password"
+                  type={showConfirmPassword ? 'text' : 'password'}
                   className="input login-input"
                   placeholder="Repeat your password"
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
                   autoComplete="new-password"
                 />
+                <button
+                  type="button"
+                  className="login-eye-btn"
+                  onClick={() => setShowConfirmPassword(s => !s)}
+                  tabIndex={-1}
+                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+                >
+                  {showConfirmPassword ? '🙈' : '👁️'}
+                </button>
               </div>
             </div>
 
@@ -133,7 +153,7 @@ export default function SignupPage() {
 
             <div className="login-footer-text">
               <span>Already have an account?</span>
-              <button type="button" className="text-link" onClick={() => navigate('/login')}>Sign in</button>
+              <button type="button" className="text-link" className="btn-primary" style={{ padding: '10px',marginLeft: '94px',borderRadius: '25px', color: '#fff', cursor: 'pointer' }} onClick={() => navigate('/login')}>Sign in</button>
             </div>
           </form>
         </div>

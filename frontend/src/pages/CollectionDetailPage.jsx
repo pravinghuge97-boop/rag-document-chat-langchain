@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import AppLayout from '../components/AppLayout'
+import ConfirmModal from '../components/ConfirmModal'
 import * as api from '../api'
 import './CollectionDetailPage.css'
 
@@ -20,6 +21,7 @@ export default function CollectionDetailPage() {
   const [view,          setView]          = useState('grid') // 'grid' | 'list'
   const [selectedFolder,setSelectedFolder]= useState(null)
   const [uploading,     setUploading]     = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(null) // { fileId, fileName }
   const fileInputRef   = useRef()
   const folderInputRef = useRef()
 
@@ -88,8 +90,14 @@ export default function CollectionDetailPage() {
     }
   }
 
-  const handleDeleteFile = async (fileId, fileName) => {
-    if (!confirm(`Are you sure you want to delete "${fileName}"?`)) return
+  const handleDeleteFile = (fileId, fileName) => {
+    setConfirmDelete({ fileId, fileName })
+  }
+
+  const handleConfirmDeleteFile = async () => {
+    if (!confirmDelete) return
+    const { fileId } = confirmDelete
+    setConfirmDelete(null)
     try {
       await api.deleteFile(collection.id, fileId)
       await refreshCollections()
@@ -298,6 +306,16 @@ export default function CollectionDetailPage() {
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        open={!!confirmDelete}
+        title="Delete File"
+        message={confirmDelete ? `Are you sure you want to delete "${confirmDelete.fileName}"? This action cannot be undone.` : ''}
+        confirmLabel="Delete"
+        variant="danger"
+        onConfirm={handleConfirmDeleteFile}
+        onCancel={() => setConfirmDelete(null)}
+      />
     </AppLayout>
   )
 }

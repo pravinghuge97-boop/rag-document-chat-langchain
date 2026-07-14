@@ -1,132 +1,24 @@
 [
   {
-    "id": "pipe-1782739757",
+    "id": "pipe-1782995909",
     "name": "My RAG Pipeline",
-    "collectionId": "col-1782569792",
-    "collectionName": "Docx file",
+    "collectionId": "col-1782887423",
+    "collectionName": "Healthcare",
     "status": "done",
     "embeddingModel": "all-MiniLM-L6-v2",
     "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-29T18:59:17.207669"
+    "userId": "user-admin",
+    "createdAt": "2026-07-02T18:08:29.738879"
   },
   {
-    "id": "pipe-1782569833",
+    "id": "pipe-1782923965",
     "name": "My RAG Pipeline",
-    "collectionId": "col-1782569792",
-    "collectionName": "Docx file",
+    "collectionId": "col-1782887423",
+    "collectionName": "Healthcare",
     "status": "done",
     "embeddingModel": "all-MiniLM-L6-v2",
     "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T19:47:13.278594"
-  },
-  {
-    "id": "pipe-1782548935",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782507764",
-    "collectionName": "jk",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T13:58:55.123126"
-  },
-  {
-    "id": "pipe-1782547107",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782545710",
-    "collectionName": "ui test",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T13:28:27.846844"
-  },
-  {
-    "id": "pipe-1782545820",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782545710",
-    "collectionName": "ui test",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T13:07:00.600324"
-  },
-  {
-    "id": "pipe-1782544318",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782507764",
-    "collectionName": "jk",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T12:41:58.603793"
-  },
-  {
-    "id": "pipe-1782504663",
-    "name": "Url",
-    "collectionId": "col-1782504503",
-    "collectionName": "Url test",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T01:41:03.076948"
-  },
-  {
-    "id": "pipe-1782499921",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782499659",
-    "collectionName": "Excel collection",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-27T00:22:01.989201"
-  },
-  {
-    "id": "pipe-1782488548",
-    "name": "Aws",
-    "collectionId": "col-1782488146",
-    "collectionName": "Aws",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-26T21:12:28.239174"
-  },
-  {
-    "id": "pipe-1782488506",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782488146",
-    "collectionName": "Aws",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-26T21:11:46.819861"
-  },
-  {
-    "id": "pipe-1782486975",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782486953",
-    "collectionName": "resume",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-26T20:46:15.384298"
-  },
-  {
-    "id": "pipe-1782485692",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782485649",
-    "collectionName": "pdf",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-26T20:24:52.724209"
-  },
-  {
-    "id": "pipe-1782479569",
-    "name": "My RAG Pipeline",
-    "collectionId": "col-1782479535",
-    "collectionName": "pdf",
-    "status": "done",
-    "embeddingModel": "all-MiniLM-L6-v2",
-    "llmModel": "llama-3.3-70b-versatile",
-    "createdAt": "2026-06-26T18:42:49.297068"
+    "userId": "user-admin",
+    "createdAt": "2026-07-01T22:09:25.526066"
   }
 ]

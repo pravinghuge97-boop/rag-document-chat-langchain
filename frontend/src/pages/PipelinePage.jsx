@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import AppLayout from '../components/AppLayout'
@@ -86,6 +86,17 @@ export default function PipelinePage() {
 
   const [deleteModal, setDeleteModal] = useState({ open: false, pipeline: null })
   const [editModal, setEditModal] = useState({ open: false, pipeline: null, name: '' })
+  const [showPipelinesDrawer, setShowPipelinesDrawer] = useState(false)
+
+  // Carousel scroll — jumps exactly one card width per click
+  const carouselRef = useRef(null)
+  const scrollCarousel = (dir) => {
+    const el = carouselRef.current
+    if (!el) return
+    const card = el.querySelector('.pipe-col-card')
+    const cardW = card ? card.offsetWidth + 10 : 118 // card width + gap
+    el.scrollBy({ left: dir * cardW, behavior: 'smooth' })
+  }
 
   const openEditPipelineModal = (pipe) => {
     setEditModal({ open: true, pipeline: pipe, name: pipe.name || '' })
@@ -224,7 +235,17 @@ export default function PipelinePage() {
           /* ── CONFIG PANEL ── */
           <div className="pipe-config">
             <div className="pipe-config-main">
-              <h2 className="pipe-section-title">⚙️ Configure Pipeline</h2>
+              <div className="pipe-config-header-row">
+                <h2 className="pipe-section-title" style={{ margin: 0 }}>⚙️ Configure Pipeline</h2>
+                <button
+                  id="show-all-pipelines-btn"
+                  className="btn btn-ghost btn-sm pipe-show-all-btn"
+                  onClick={() => setShowPipelinesDrawer(true)}
+                >
+                  📚 Show All Pipelines
+                  {pipelines.length > 0 && <span className="pipe-badge-count">{pipelines.length}</span>}
+                </button>
+              </div>
 
               {/* Name */}
               <div className="pipe-field">
@@ -236,24 +257,34 @@ export default function PipelinePage() {
               {/* Collection */}
               <div className="pipe-field">
                 <label className="pipe-label">📁 Source Collection</label>
-                <div className="pipe-col-grid">
-                  {collections.map(c => (
-                    <div
-                      key={c.id}
-                      id={`select-collection-${c.id}`}
-                      className={`pipe-col-card${selectedColId === c.id ? ' selected' : ''}`}
-                      onClick={() => setSelectedColId(c.id)}
-                    >
-                      <div className="pipe-col-card-top">
-                        <span className="pipe-col-card-icon">
-                          {c.type === 'pdf' ? '📋' : c.type === 'url' ? '🌐' : '📁'}
-                        </span>
+                <div className="pipe-carousel-wrap">
+                  <button
+                    className="pipe-carousel-arrow pipe-carousel-arrow-left"
+                    onClick={() => scrollCarousel(-1)}
+                    aria-label="Scroll left"
+                  >&#8249;</button>
+                  <div className="pipe-carousel" ref={carouselRef}>
+                    {collections.map(c => (
+                      <div
+                        key={c.id}
+                        id={`select-collection-${c.id}`}
+                        className={`pipe-col-card${selectedColId === c.id ? ' selected' : ''}`}
+                        onClick={() => setSelectedColId(c.id)}
+                      >
+                        <div className="pipe-col-card-folder-icon">
+                          {c.type === 'url' ? '🌐' : c.type === 'pdf' ? '📋' : '📁'}
+                        </div>
+                        <div className="pipe-col-card-name">{c.name}</div>
+                        <div className="pipe-col-card-meta">{c.files.length} {c.files.length === 1 ? 'file' : 'files'}</div>
                         {selectedColId === c.id && <span className="pipe-col-card-check">✓</span>}
                       </div>
-                      <div className="pipe-col-card-name">{c.name}</div>
-                      <div className="pipe-col-card-meta">{c.files.length} files</div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <button
+                    className="pipe-carousel-arrow pipe-carousel-arrow-right"
+                    onClick={() => scrollCarousel(1)}
+                    aria-label="Scroll right"
+                  >&#8250;</button>
                 </div>
               </div>
 
@@ -286,6 +317,11 @@ export default function PipelinePage() {
                   <input type="range" min="0" max="500" step="50" value={chunkOverlap}
                     onChange={e => setChunkOverlap(+e.target.value)} className="pipe-slider" />
                 </div>
+                <div className="pipe-field">
+                  <label className="pipe-label">Top-K <span className="pipe-val">{topK}</span></label>
+                  <input type="range" min="1" max="10" step="1" value={topK}
+                    onChange={e => setTopK(+e.target.value)} className="pipe-slider" />
+                </div>
               </div>
 
               {/* Models */}
@@ -304,21 +340,28 @@ export default function PipelinePage() {
                     {VECTOR_DBS.map(m => <option key={m}>{m}</option>)}
                   </select>
                 </div>
-              </div>
-
-              <div className="pipe-row">
-                <div className="pipe-field">
+                  <div className="pipe-field">
                   <label className="pipe-label">💬 LLM Model</label>
                   <select id="llm-model-select" className="input" value={llmModel}
                     onChange={e => setLlmModel(e.target.value)}>
                     {LLM_MODELS.map(m => <option key={m}>{m}</option>)}
                   </select>
                 </div>
-                <div className="pipe-field">
+              </div>
+
+              <div className="pipe-row">
+                {/* <div className="pipe-field">
+                  <label className="pipe-label">💬 LLM Model</label>
+                  <select id="llm-model-select" className="input" value={llmModel}
+                    onChange={e => setLlmModel(e.target.value)}>
+                    {LLM_MODELS.map(m => <option key={m}>{m}</option>)}
+                  </select>
+                </div> */}
+                {/* <div className="pipe-field">
                   <label className="pipe-label">Top-K <span className="pipe-val">{topK}</span></label>
                   <input type="range" min="1" max="10" step="1" value={topK}
                     onChange={e => setTopK(+e.target.value)} className="pipe-slider" />
-                </div>
+                </div> */}
               </div>
 
               <button
@@ -348,30 +391,72 @@ export default function PipelinePage() {
           </div>
         )}
 
-        {!running && !completed && !errorState && pipelines.length > 0 && (
-          <div className="pipe-existing-list">
-            <h3 className="pipe-section-title">📚 Pipelines</h3>
-            <div className="pipe-list-grid">
-              {pipelines.map((pipe, i) => (
-                <div key={pipe.id} className="pipe-list-card" style={{ animationDelay: `${i * 0.06}s` }}>
-                  <div className="pipe-list-card-row">
-                    <div>
-                      <div className="pipe-list-card-title">{pipe.name}</div>
-                      <div className="pipe-list-card-subtitle">{pipe.collectionName || 'No collection selected'}</div>
-                    </div>
-                    <div className="pipe-list-card-actions">
-                      <button className="btn btn-ghost btn-sm" onClick={() => navigate(`/chat/${pipe.id}`)}>Open</button>
-                      <button className="btn btn-ghost btn-sm" onClick={() => openEditPipelineModal(pipe)}>Edit</button>
-                      <button className="btn btn-ghost btn-sm" style={{ color: '#ef4444' }} onClick={() => openDeletePipelineModal(pipe)}>Delete</button>
-                    </div>
-                  </div>
-                  <div className="pipe-list-card-meta">
-                    <span>Status: {pipe.status}</span>
-                    <span>Embedding: {pipe.embeddingModel}</span>
-                    <span>LLM: {pipe.llmModel}</span>
-                  </div>
+        {/* Pipelines Drawer */}
+        {showPipelinesDrawer && (
+          <div className="pipe-drawer-overlay" onClick={() => setShowPipelinesDrawer(false)}>
+            <div className="pipe-drawer" onClick={e => e.stopPropagation()}>
+              <div className="pipe-drawer-header">
+                <div className="pipe-drawer-title">
+                  <span>📚</span>
+                  <span>All Pipelines</span>
+                  {pipelines.length > 0 && <span className="pipe-badge-count">{pipelines.length}</span>}
                 </div>
-              ))}
+                <button
+                  className="btn btn-ghost btn-icon"
+                  id="close-pipelines-drawer-btn"
+                  onClick={() => setShowPipelinesDrawer(false)}
+                >✕</button>
+              </div>
+              <div className="pipe-drawer-body">
+                {pipelines.length === 0 ? (
+                  <div className="pipe-drawer-empty">
+                    <div className="pipe-drawer-empty-icon">🔧</div>
+                    <div className="pipe-drawer-empty-text">No pipelines yet</div>
+                    <div className="pipe-drawer-empty-sub">Configure and run your first pipeline above.</div>
+                  </div>
+                ) : (
+                  <div className="pipe-drawer-list">
+                    {pipelines.map((pipe, i) => (
+                      <div key={pipe.id} className="pipe-drawer-card animate-fade-in" style={{ animationDelay: `${i * 0.05}s` }}>
+                        <div className="pipe-drawer-card-header">
+                          <div className="pipe-drawer-card-icon">
+                            {pipe.status === 'done' ? '✅' : pipe.status === 'running' ? '⚡' : '🔧'}
+                          </div>
+                          <div className="pipe-drawer-card-info">
+                            <div className="pipe-drawer-card-name">{pipe.name}</div>
+                            <div className="pipe-drawer-card-col">{pipe.collectionName || 'No collection'}</div>
+                          </div>
+                          <span className={`badge ${
+                            pipe.status === 'done' ? 'badge-green' :
+                            pipe.status === 'running' ? 'badge-yellow' : 'badge-purple'
+                          }`}>{pipe.status}</span>
+                        </div>
+                        <div className="pipe-drawer-card-meta">
+                          <span title="Embedding Model">🧮 {pipe.embeddingModel || '—'}</span>
+                          <span title="LLM Model">💬 {pipe.llmModel || '—'}</span>
+                        </div>
+                        <div className="pipe-drawer-card-actions">
+                          <button
+                            className="btn btn-ghost btn-sm"
+                            id={`drawer-open-${pipe.id}`}
+                            onClick={() => { setShowPipelinesDrawer(false); navigate(`/chat/${pipe.id}`) }}
+                          >💬 Open Chat</button>
+                          <button
+                            className="btn btn-ghost btn-sm"
+                            id={`drawer-edit-${pipe.id}`}
+                            onClick={() => { setShowPipelinesDrawer(false); openEditPipelineModal(pipe) }}
+                          >✏️ Edit</button>
+                          <button
+                            className="btn btn-ghost btn-sm pipe-drawer-delete-btn"
+                            id={`drawer-delete-${pipe.id}`}
+                            onClick={() => { setShowPipelinesDrawer(false); openDeletePipelineModal(pipe) }}
+                          >🗑️ Delete</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

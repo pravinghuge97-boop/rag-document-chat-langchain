@@ -44,7 +44,6 @@ export default function LoginPage() {
         <div className="login-brand">
           <div className="login-brand-icon animate-float">⚛</div>
           <h1 className="login-brand-name gradient-text">RAG Platform</h1>
-          <p className="login-brand-sub">Powered by LangChain + ChromaDB + Groq</p>
         </div>
 
         {/* Card */}
@@ -128,7 +127,7 @@ export default function LoginPage() {
 
             <div className="login-footer-text">
               <span>New to RAG Platform?</span>
-              <button type="button" className="text-link" onClick={() => navigate('/signup')}>Create an account</button>
+              <button type="button" className="btn-primary" style={{ padding: '10px',marginLeft: '3rem',borderRadius: '25px', color: '#fff', cursor: 'pointer' }} onClick={() => navigate('/signup')}>Create an account</button>
             </div>
           </form>
         </div>

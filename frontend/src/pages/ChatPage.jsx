@@ -406,6 +406,7 @@ function AiMessage({ msg, isLatest }) {
     <div className="chat-msg chat-msg-ai">
       <div className="chat-msg-avatar">⚛</div>
       <div className="chat-msg-content">
+        <div className="chat-msg-sender-name" style={{ fontSize: '0.8rem', color: '#a5b4fc', fontWeight: '600', marginBottom: '1px' }}>Assistant</div>
         <div className="chat-bubble chat-bubble-ai">
           <pre className="chat-bubble-text">
             {isLatest ? displayed : msg.text}
@@ -484,7 +485,7 @@ export default function ChatPage() {
   const bottomRef = useRef(null);
   const textareaRef = useRef(null);
 
-  const activeSession = sessions.find(s => s.id === activeSessionId) || null;
+  const activeSession = sessions.find(s => s.id === activeSessionId) || sessions[0] || null;
   const messages = activeSession ? activeSession.messages : [];
 
   // Fixed lastAiIdx using useMemo
@@ -577,7 +578,7 @@ export default function ChatPage() {
     if (!q || thinking) return;
 
     setInput('');
-    let currentSessionId = activeSessionId;
+    let currentSessionId = activeSessionId || (sessions[0] ? sessions[0].id : '');
     if (!currentSessionId) {
       currentSessionId = createNewSession(pipelineId, q, pipeline.llmModel, collection?.name || 'your documents', collection?.files.length || 0);
     }
@@ -693,6 +694,7 @@ export default function ChatPage() {
               msg.role === 'user' ? (
                 <div key={msg.id} className="chat-msg chat-msg-user">
                   <div className="chat-msg-content">
+                    <div className="chat-msg-sender-name" style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: '600', marginBottom: '1px', textAlign: 'right' }}>You</div>
                     <div className="chat-bubble chat-bubble-user">
                       {msg.text}
                     </div>
@@ -709,6 +711,7 @@ export default function ChatPage() {
               <div className="chat-msg chat-msg-ai">
                 <div className="chat-msg-avatar">⚛</div>
                 <div className="chat-msg-content">
+                  <div className="chat-msg-sender-name" style={{ fontSize: '0.8rem', color: '#a5b4fc', fontWeight: '600', marginBottom: '1px' }}>Assistant</div>
                   <div className="chat-bubble chat-bubble-ai chat-thinking">
                     <div className="typing-indicator">
                       <span></span><span></span><span></span>

@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    Sidebar.css — Premium Antigravity-Style
    ========================================================= */
 
@@ -97,6 +97,11 @@
   padding: 0.0rem 0.5rem 0.0rem;
 }
 
+.sidebar-add-chat-btn:hover {
+  opacity: 1 !important;
+  color: #8b5cf6 !important;
+}
+
 /* -- Links -- */
 .sidebar-link {
   display: flex;
@@ -137,10 +142,22 @@
 }
 
 .sidebar-link-icon {
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   width: 20px;
-  text-align: center;
+  height: 20px;
+  color: #94a3b8; /* Modern slate icon color */
+  transition: color 0.2s, transform 0.2s;
+}
+
+.sidebar-link:hover .sidebar-link-icon {
+  color: #ffffff; /* Modern clean white icon on hover */
+}
+
+.sidebar-link.active .sidebar-link-icon {
+  color: #ffffff; /* Modern clean white icon when active */
 }
 
 .sidebar-badge {
@@ -159,6 +176,36 @@
 /* -- Chat session links -- */
 .sidebar-link-chat {
   opacity: 0.9;
+  position: relative;
+}
+
+.sidebar-chat-delete-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.sidebar-link-chat:hover .sidebar-chat-delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-chat-delete-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .sidebar-link-chat-name {
@@ -167,6 +214,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 0.82rem;
+  padding-right: 18px; /* space for delete button on hover */
 }
 
 .sidebar-link-chat-dot {

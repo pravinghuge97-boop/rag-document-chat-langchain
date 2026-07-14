@@ -48,26 +48,25 @@ export function AppProvider({ children }) {
   // Helper to create a new session
   const createNewSession = (pipelineId, initialText = null, llmModel = 'llama-3.3-70b', collectionName = 'your documents', fileCount = 0) => {
     const newId = `session-${Date.now()}`
-    const pipeSessions = sessions[pipelineId] || []
-    const newSess = {
-      id: newId,
-      name: initialText ? (initialText.slice(0, 22) + (initialText.length > 22 ? '...' : '')) : `Chat ${pipeSessions.length + 1}`,
-      messages: [
-        {
-          id: 'welcome',
-          role: 'ai',
-          text: `Hello! 👋 I'm your Assistant How can i help today?\nI can answer questions using **${collectionName}** (${fileCount} files).`,
-          sources: [],
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        }
-      ]
-    };
-
-    const updatedSessions = [newSess, ...pipeSessions]
+    
     setSessions(prev => {
-      const next = { ...prev, [pipelineId]: updatedSessions }
+      const pipeSessions = prev[pipelineId] || []
+      const newSess = {
+        id: newId,
+        name: initialText ? (initialText.slice(0, 22) + (initialText.length > 22 ? '...' : '')) : `Chat ${pipeSessions.length + 1}`,
+        messages: [
+          {
+            id: 'welcome',
+            role: 'ai',
+            text: `Hello! 👋 I'm your Assistant How can i help today?\nI can answer questions using **${collectionName}** (${fileCount} files).`,
+            sources: [],
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          }
+        ]
+      };
+      const updatedSessions = [newSess, ...pipeSessions]
       localStorage.setItem(`rag_sessions_${pipelineId}`, JSON.stringify(updatedSessions))
-      return next
+      return { ...prev, [pipelineId]: updatedSessions }
     })
 
     setActiveSessionIds(prev => {
@@ -81,17 +80,17 @@ export function AppProvider({ children }) {
 
   // Helper to delete a session
   const deleteSession = (pipelineId, sessionId) => {
-    const pipeSessions = sessions[pipelineId] || []
-    const updatedSessions = pipeSessions.filter(s => s.id !== sessionId)
-    
     setSessions(prev => {
-      const next = { ...prev, [pipelineId]: updatedSessions }
+      const pipeSessions = prev[pipelineId] || []
+      const updatedSessions = pipeSessions.filter(s => s.id !== sessionId)
       localStorage.setItem(`rag_sessions_${pipelineId}`, JSON.stringify(updatedSessions))
-      return next
+      return { ...prev, [pipelineId]: updatedSessions }
     })
 
     if (activeSessionIds[pipelineId] === sessionId) {
-      const nextActiveId = updatedSessions.length > 0 ? updatedSessions[0].id : ''
+      const nextActiveId = (sessions[pipelineId] || []).filter(s => s.id !== sessionId).length > 0 
+        ? (sessions[pipelineId] || []).filter(s => s.id !== sessionId)[0].id 
+        : ''
       setActiveSessionIds(prev => {
         const next = { ...prev, [pipelineId]: nextActiveId }
         if (nextActiveId) {
@@ -106,32 +105,31 @@ export function AppProvider({ children }) {
 
   // Helper to update session messages (e.g. adding messages)
   const updateSessionMessages = (pipelineId, sessionId, messagesUpdater, renameQuery = null) => {
-    const pipeSessions = sessions[pipelineId] || []
-    const updatedSessions = pipeSessions.map(s => {
-      if (s.id === sessionId) {
-        const nextMessages = typeof messagesUpdater === 'function' ? messagesUpdater(s.messages) : messagesUpdater
-        
-        let nextName = s.name
-        if (renameQuery) {
-          const isDefaultName = s.name.startsWith('Chat ') && s.messages.length === 1
-          if (isDefaultName) {
-            nextName = renameQuery.slice(0, 22) + (renameQuery.length > 22 ? '...' : '')
+    setSessions(prev => {
+      const pipeSessions = prev[pipelineId] || []
+      const updatedSessions = pipeSessions.map(s => {
+        if (s.id === sessionId) {
+          const nextMessages = typeof messagesUpdater === 'function' ? messagesUpdater(s.messages) : messagesUpdater
+          
+          let nextName = s.name
+          if (renameQuery) {
+            const isDefaultName = s.name.startsWith('Chat ') && s.messages.length === 1
+            if (isDefaultName) {
+              nextName = renameQuery.slice(0, 22) + (renameQuery.length > 22 ? '...' : '')
+            }
+          }
+
+          return {
+            ...s,
+            name: nextName,
+            messages: nextMessages
           }
         }
+        return s
+      })
 
-        return {
-          ...s,
-          name: nextName,
-          messages: nextMessages
-        }
-      }
-      return s
-    })
-
-    setSessions(prev => {
-      const next = { ...prev, [pipelineId]: updatedSessions }
       localStorage.setItem(`rag_sessions_${pipelineId}`, JSON.stringify(updatedSessions))
-      return next
+      return { ...prev, [pipelineId]: updatedSessions }
     })
   }
 
